@@ -20,7 +20,7 @@ The most basic web service takes a request with some sort of credential and prod
 
 ## Feature: Access Tokens
 
-The problem with many credentials is frequently that they’re very expensive to authenticate. Many authentication methods often require responding to an SMS message, entering a one-time-password, or hashing a password through a computationally-expensive PBKDF.
+Credentials are frequently very expensive to authenticate. Many authentication methods entering a one-time-password, responding to an SMS message, or hashing a password through a computationally-expensive PBKDF.
 
 To avoid having to re-authenticate the credential every time a request needs to be made, Web services have a login process where the credential is exchanged for a highly-secure, limited-duration bearer token:
 
@@ -57,11 +57,11 @@ For desktop applications, mobile applications, and other applications where the 
 
 ## Feature: Access Tokens (Split client/user-agent)
 
-Sometimes the user wants to allow additional parties to make requests to the resource server on their behalf. For example, perhaps the user wants a social network to access their address book from their email, or a user wants to allow a finance program to access their banking transactions.
+Sometimes the user, working from their _user-agent_, wants to allow third parties to make requests to the resource server on their behalf, which they do from their _client_. For example, perhaps the user wants a social network to access their address book from their email, or a user wants to allow a finance service to access their banking transactions. The user will log into their email account with their user-agent, and wants to give an access token to the social network's client.
 
-It is difficult for the user to manually generate an authorization token and enter it into the website. Further, this introduces an attack vector, as if the user’s computer is compromised, the attacker can use any access tokens present on their computer.
+However it is difficult for the user to manually generate an authorization token and enter it into the website. Further, this passes the access token across more places than necessary (since the user doesn't ever need to see the access token firsthand), and such excessive handling increases the chance it will be leaked.
 
-To facilitate convenience and security, OAuth can send the user-agent an _authorization code_ instead of an _access token_. This authorization code is a token that can only be used by a specific client.
+To facilitate convenience and security, OAuth can send the user-agent an _authorization code_ instead of an access token. This authorization code is a token that can be exchanged for an access token, and can only be used by a specific party that has identified themselves (the client).
 
 0. Resource owner indicates they want to sign in
 0. Client service redirects the resource owner to the authorization server
