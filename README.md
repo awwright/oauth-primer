@@ -41,17 +41,17 @@ In OAuth, a username and password can be exchanged for a bearer token using `gra
 
 ## Feature: Split resource/authorization servers
 
-Sometimes it’s useful for services to host resources on a different server than the one managing users and authorization.
+Sometimes it’s useful for services to host resources on a server separate from than the one managing users and authorization.
 
-To accommodate this, OAuth makes a distinction between a _resource server_ and an _authorization server_. When a user needs to log in, they acquire an authorization token from the authorization server, then pass it to a trusted resource server in the Authorization header.
+To accommodate this, OAuth makes a distinction between a _resource server_ and an _authorization server_. When a user needs to make a request, they acquire an authorization token from the authorization server, then pass it to a trusted resource server in the Authorization header.
 
 
 
 ## Feature: Redirect workflow
 
-Not all login workflows use a username and password only. Modern Web applications, and especially applications protecting valuable assets like bank accounts, will want to use Two-Factor Authentication, where a user logging in will need to copy a number off their phone, or other device that thwarts remote access.
+Not all login workflows use a username and password only. Modern Web applications, and especially applications protecting valuable assets like bank accounts, will use Two-Factor Authentication, which may involve copying a number off their phone, or other device that thwarts remote access.
 
-These Two-Factor Authentication systems must be asynchronous; you may need to give the user logging in instructions on how to further identify themselves, and you don’t want to give out an access token until they have proven their identity.
+These Two-Factor Authentication systems must be asynchronous; you may need to give the user instructions on how to further identify themselves, and you don’t want to give out an access token until they have proven their identity.
 
 For desktop applications, mobile applications, and other applications where the user is running trusted code, but needs to log in to a website, OAuth provides the “Implicit grant” workflow:
 
@@ -64,7 +64,7 @@ For desktop applications, mobile applications, and other applications where the 
 
 
 
-## Feature: Access Tokens (Split client/user-agent)
+## Feature: Authorization code (Split client/user-agent)
 
 Sometimes the user, working from their _user-agent_, wants to allow third parties to make requests to the resource server on their behalf, which the third party does from their _client_. For example, perhaps the user wants a social network to access their address book from their email, or a user wants to allow a finance service to access their banking transactions. The user will log into their email account with their user-agent, and wants to give an access token to the social network's client.
 
@@ -86,6 +86,6 @@ To do this, OAuth can send the user-agent an _authorization code_ instead of an 
 
 Since access tokens are frequently used, it’s possible that they might get leaked, so it’s prudent to limit the amount of time that they are valid for. However, this poses a problem that users have to re-follow the authorization process every time an authorization code expires - which might be as short as a few hours.
 
-In addition to the access token, OAuth can also pass a _refresh token_ to a client, which is similar to an access code in that it allows the client to obtain a new authorization code.
+In addition to the access token, OAuth can also pass a _refresh token_ to a client, which is a kind of access code that allows the client to rotate the access token and refresh token, and obtain new ones.
 
 Generating a new refresh token instead of re-using the authorization code helps ensure that credentials do not have to be long lived, and are rotated automatically.
