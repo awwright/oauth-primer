@@ -49,7 +49,7 @@ To accommodate this, OAuth makes a distinction between a _resource server_ and a
 
 ## Feature: Redirect workflow
 
-Not all login workflows use a username and password only. Modern Web applications, and especially applications protecting valuable assets like bank accounts, will use Two-Factor Authentication, which may involve copying a number off their phone, or other device that thwarts remote access.
+Not all login workflows use a username and password only. Modern Web applications, and especially applications protecting valuable assets like bank accounts, will use Two-Factor Authentication, which may involve copying a number off their phone, or other device with the effect of thwarting remote access.
 
 These Two-Factor Authentication systems must be asynchronous; you may need to give the user instructions on how to further identify themselves, and you don’t want to give out an access token until they have proven their identity.
 
