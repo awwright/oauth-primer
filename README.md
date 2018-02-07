@@ -86,8 +86,8 @@ The access token is only usable by clients that have previously registered a sec
 
 ## Feature: Refresh Tokens
 
-Since access tokens are frequently used, it’s possible that they might get leaked, so it’s prudent to limit the amount of time that they are valid for. However, this poses a problem that users have to re-follow the authorization process every time an access token expires - which might be as short as a few hours.
+Since access tokens are used on multiple servers, it’s possible that they might get leaked, so it’s prudent to limit the amount of time that they are valid for. However, this poses a problem that users have to re-follow the authorization process every time an access token expires - often as short as a few hours.
 
-In addition to the access token, OAuth can also pass a _refresh token_ to a client, which is a kind of access code that allows the client to rotate the access token and refresh token, and obtain new ones.
+In addition to the access token, OAuth can also pass a _refresh token_ to a client: a credential shared only between the client and authorization server, that allows the client to rotate the access token and refresh token, and obtain new ones.
 
 Generating a new refresh token instead of re-using the authorization code helps ensure that credentials do not have to be long lived, and are rotated automatically.
